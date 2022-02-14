@@ -7,8 +7,13 @@
 
 import Foundation
 
+protocol SearchViewModelCoordinatorDelegate: AnyObject {
+    func selectMovie(_ movie: Movie)
+}
+
 class SearchViewModel {
     var movies = [Movie]()
+    weak var coordinatorDelegate: SearchViewModelCoordinatorDelegate?
     
     init(movies: [Movie]) {
         self.movies = movies
@@ -32,6 +37,7 @@ extension SearchViewModel {
     
     func selectRow(row: Int) {
         let movie = self.movies[row]
-        // 화면전환
+        
+        self.coordinatorDelegate?.selectMovie(movie)
     }
 }
