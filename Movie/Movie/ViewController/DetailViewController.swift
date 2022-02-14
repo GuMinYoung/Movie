@@ -16,16 +16,14 @@ class DetailViewController: UIViewController {
     let spinner = UIActivityIndicatorView()
     
     override func viewDidLoad() {
-        
         self.webView.navigationDelegate = self
         
-        guard let urlString = viewModel?.movie.link,
+        guard let movie = viewModel?.movie,
+            let urlString = viewModel?.movie.link,
               let url = URL(string: urlString) else {return}
         let req = URLRequest(url: url)
         self.webView.load(req)
-
-        guard let movie = viewModel?.movie else {return}
-        infoView.update(with: movie)
+        self.infoView.update(with: movie)
     }
 }
 

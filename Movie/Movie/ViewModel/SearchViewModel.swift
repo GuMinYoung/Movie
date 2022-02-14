@@ -9,6 +9,12 @@ import Foundation
 
 protocol SearchViewModelCoordinatorDelegate: AnyObject {
     func selectMovie(_ movie: Movie)
+    func starClicked(_ movie: Movie)
+    func bookmarkClicked()
+}
+
+extension SearchViewModelCoordinatorDelegate {
+    func bookmarkClicked() {}
 }
 
 class SearchViewModel {
@@ -39,5 +45,17 @@ extension SearchViewModel {
         let movie = self.movies[row]
         
         self.coordinatorDelegate?.selectMovie(movie)
+    }
+    
+    func goToBookmark() {
+        self.coordinatorDelegate?.bookmarkClicked()
+    }
+    
+    func starClicked(row: Int) {
+        let movie = self.movies[row]
+        
+        self.coordinatorDelegate?.starClicked(movie)
+        //print("북마크 등록 - ", movie)
+        // todo 유저디폴트 movie 저장
     }
 }
