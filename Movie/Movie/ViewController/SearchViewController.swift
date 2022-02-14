@@ -12,7 +12,20 @@ import Alamofire
 class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchField: UITextField!
+    
     var viewModel: SearchViewModel?
+    
+//    @IBAction func starButtonClicked(_ sender: UIButton) {
+//        var superview = sender.superview
+//        while let view = superview, !(view is UITableViewCell) {
+//            superview = view.superview
+//        }
+//
+//        guard let cell = superview as? UITableViewCell,
+//              let indexPath = tableView.indexPath(for: cell) else { return }
+//
+//        self.viewModel?.starClicked(row: indexPath.row)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +34,9 @@ class SearchViewController: UIViewController {
         // Do any additional setup after loading the view.
         searchField.addTarget(self, action: #selector(textFieldDidChange),
             for: UIControl.Event.editingChanged)
+        
+        let rightBarButton = UIBarButtonItem(title: "북마크", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.bookmarkTapped(_:)))
+        self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
     @objc func textFieldDidChange(_ textField: UITextField){
@@ -41,6 +57,10 @@ class SearchViewController: UIViewController {
             self.viewModel?.movies = movies
             self.tableView.reloadData()
         }
+    }
+    
+    @objc func bookmarkTapped(_ sender: UIBarButtonItem) {
+        viewModel?.goToBookmark()
     }
 }
 
