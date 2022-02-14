@@ -50,6 +50,7 @@
 		FBFB19CF27BA22010078084A /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
 		FBFB19D127BA223C0078084A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FBFB19D327BA227E0078084A /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		FBFB19D627BA39AE0078084A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +71,7 @@
 			children = (
 				8E180A9727B6A8F800413FA8 /* Movie */,
 				8E180A9627B6A8F800413FA8 /* Products */,
+				FBFB19D527BA39AE0078084A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +163,14 @@
 				FBFB19CF27BA22010078084A /* DetailCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		FBFB19D527BA39AE0078084A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FBFB19D627BA39AE0078084A /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
