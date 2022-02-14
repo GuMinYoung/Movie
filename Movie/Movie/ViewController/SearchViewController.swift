@@ -18,7 +18,6 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        viewModel = SearchViewModel()
         // Do any additional setup after loading the view.
         searchField.addTarget(self, action: #selector(textFieldDidChange),
             for: UIControl.Event.editingChanged)
@@ -39,7 +38,7 @@ class SearchViewController: UIViewController {
                                              .replacingOccurrences(of: "|", with: ", "),
                              userRating: $0.userRating)
             }
-            self.viewModel = SearchViewModel(movies: movies)
+            self.viewModel?.movies = movies
             self.tableView.reloadData()
         }
     }
