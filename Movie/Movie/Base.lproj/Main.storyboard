@@ -319,11 +319,11 @@
                                     <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="is3-Gf-mHb" secondAttribute="trailing" constant="20" symbolic="YES" id="yqF-9f-gWc"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="actorLabel" destination="jFy-ZB-EsG" id="jZC-0n-BfI"/>
-                                    <outlet property="bookmarkBtn" destination="is3-Gf-mHb" id="6Eq-z9-oiZ"/>
-                                    <outlet property="directorLabel" destination="JRX-oT-zaP" id="2ae-2t-QAG"/>
-                                    <outlet property="thumbnailImageView" destination="nBH-Ow-MTr" id="45D-mt-QfG"/>
-                                    <outlet property="userRatingLabel" destination="yWW-T2-FhV" id="IP5-tj-0A9"/>
+                                    <outlet property="actorLabel" destination="jFy-ZB-EsG" id="XIn-E1-vJe"/>
+                                    <outlet property="bookmarkBtn" destination="is3-Gf-mHb" id="t6M-Jk-Tc0"/>
+                                    <outlet property="directorLabel" destination="JRX-oT-zaP" id="BIW-Jz-tuc"/>
+                                    <outlet property="thumbnailImageView" destination="nBH-Ow-MTr" id="Nrw-mS-qMd"/>
+                                    <outlet property="userRatingLabel" destination="yWW-T2-FhV" id="Vgi-gz-ng4"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -340,7 +340,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="infoView" destination="law-c2-i7m" id="Dlw-dQ-ImV"/>
+                        <outlet property="infoView" destination="law-c2-i7m" id="ZEA-ly-mvJ"/>
                         <outlet property="webView" destination="JN8-v5-A2q" id="KZa-U7-wpU"/>
                     </connections>
                 </viewController>
