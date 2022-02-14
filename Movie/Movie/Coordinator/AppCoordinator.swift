@@ -48,6 +48,13 @@ class AppCoordinator: BaseCoordinator {
         store(coordinator: detailCoordinator)
         detailCoordinator.start()
     }
+    
+//    private func bookmarkFlow() {
+//        let bookmarkCoordinator = BookmarkCoordinator(navigationController: self.rootViewController)
+//        bookmarkCoordinator.delegate = self
+//        store(coordinator: bookmarkCoordinator)
+//        bookmarkCoordinator.start()
+//    }
 }
 
 extension AppCoordinator: SearchCoordinatorDelegate {
@@ -61,5 +68,9 @@ extension AppCoordinator: DetailCoordinatorDelegate {
     func didFinishDetailCoordinator(coordinator: Coordinator) {
         self.free(coordinator: coordinator)
         self.searchFlow()
+    }
+    
+    func bookmarkTapped() {
+        //
     }
 }

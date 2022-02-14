@@ -33,4 +33,8 @@ class MovieCell: UITableViewCell {
         self.userRatingLabel.text = "평점: " + (movie.userRating ?? "")
         self.thumbnailImageView.setImage(fromUrl: movie.imageUrl ?? "")
     }
+    
+    func changeBookmarkBtnColor() {
+        self.bookmarkBtn.backgroundColor = UIColor.red
+    }
 }

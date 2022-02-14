@@ -42,7 +42,7 @@ class SearchCoordinator: BaseCoordinator {
     
     lazy var bookmarkVC: BookmarkViewController? = {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BookmarkViewController") as? BookmarkViewController
-        vc?.modalPresentationStyle = .pageSheet
+        vc?.modalPresentationStyle = .fullScreen
         return vc
     }()
 }
@@ -50,15 +50,17 @@ class SearchCoordinator: BaseCoordinator {
 extension SearchCoordinator: SearchViewModelCoordinatorDelegate {
     func bookmarkClicked() {
         let viewModel = BookmarkViewModel()
+        viewModel.bookmarkList = UserDefaultsManager.bookmarkList ?? [Movie]()
+        viewModel.coordinatorDelegate = self
         guard let vc = self.bookmarkVC else {return}
         vc.viewModel = viewModel
-        
-        
-        self.navigationController.present(vc, animated: true, completion: nil)
+        self.navigationController.pushViewController(vc, animated: true)
     }
     
     func starClicked(_ movie: Movie) {
-        //
+        var bookmarkList = UserDefaultsManager.bookmarkList ?? [Movie]()
+        bookmarkList.append(movie)
+        UserDefaultsManager.bookmarkList = bookmarkList
     }
     
     func selectMovie(_ movie: Movie) {

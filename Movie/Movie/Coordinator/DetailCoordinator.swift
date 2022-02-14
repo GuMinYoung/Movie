@@ -10,7 +10,7 @@ import UIKit
 
 protocol DetailCoordinatorDelegate: AnyObject {
   func didFinishDetailCoordinator(coordinator: Coordinator)
-  //func forecastClicked()
+  func bookmarkTapped()
 }
 
 class DetailCoordinator: BaseCoordinator {
@@ -23,6 +23,7 @@ class DetailCoordinator: BaseCoordinator {
       let viewModel = DetailViewModel(with: self.movie)
       vc?.viewModel = viewModel
       vc?.viewModel?.coordinatorDelegate = self
+      vc?.navigationItem.title = self.movie.title
       return vc
     }()
     

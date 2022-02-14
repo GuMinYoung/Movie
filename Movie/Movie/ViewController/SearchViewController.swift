@@ -15,23 +15,24 @@ class SearchViewController: UIViewController {
     
     var viewModel: SearchViewModel?
     
-//    @IBAction func starButtonClicked(_ sender: UIButton) {
-//        var superview = sender.superview
-//        while let view = superview, !(view is UITableViewCell) {
-//            superview = view.superview
-//        }
-//
-//        guard let cell = superview as? UITableViewCell,
-//              let indexPath = tableView.indexPath(for: cell) else { return }
-//
-//        self.viewModel?.starClicked(row: indexPath.row)
-//    }
+    @IBAction func starButtonClicked(_ sender: UIButton) {
+        var superview = sender.superview
+        while let view = superview, !(view is UITableViewCell) {
+            superview = view.superview
+        }
+
+        guard let cell = superview as? UITableViewCell,
+              let indexPath = tableView.indexPath(for: cell) else { return }
+
+        self.viewModel?.starClicked(row: indexPath.row)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
+        searchField.autocorrectionType = .no
         searchField.addTarget(self, action: #selector(textFieldDidChange),
             for: UIControl.Event.editingChanged)
         

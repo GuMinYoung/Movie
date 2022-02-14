@@ -13,6 +13,10 @@ protocol SearchViewModelCoordinatorDelegate: AnyObject {
     func bookmarkClicked()
 }
 
+extension SearchViewModelCoordinatorDelegate {
+    func bookmarkClicked() {}
+}
+
 class SearchViewModel {
     var movies = [Movie]()
     weak var coordinatorDelegate: SearchViewModelCoordinatorDelegate?
@@ -50,7 +54,8 @@ extension SearchViewModel {
     func starClicked(row: Int) {
         let movie = self.movies[row]
         
-        print("북마크 등록 - ", movie)
-        // 유저디폴트 movie 저장
+        self.coordinatorDelegate?.starClicked(movie)
+        //print("북마크 등록 - ", movie)
+        // todo 유저디폴트 movie 저장
     }
 }

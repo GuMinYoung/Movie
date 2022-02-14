@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie {
+struct Movie: Codable {
     let title: String?
     let link: String?
     let imageUrl: String?
