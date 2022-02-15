@@ -34,7 +34,7 @@ class MovieCell: UITableViewCell {
         self.thumbnailImageView.setImage(fromUrl: movie.imageUrl ?? "")
     }
     
-    func changeBookmarkBtnColor() {
-        self.bookmarkBtn.backgroundColor = UIColor.red
+    func changeBookmarkBtnImage() {
+        self.bookmarkBtn.setImage(UIImage(systemName: "star.fill"), for: .normal)
     }
 }

@@ -22,10 +22,11 @@ class SearchViewController: UIViewController {
             superview = view.superview
         }
 
-        guard let cell = superview as? UITableViewCell,
+        guard let cell = superview as? MovieCell,
               let indexPath = tableView.indexPath(for: cell) else { return }
 
         self.viewModel?.starClicked(row: indexPath.row)
+        cell.changeBookmarkBtnImage()
     }
     
     override func viewDidLoad() {
