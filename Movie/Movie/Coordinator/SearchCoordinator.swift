@@ -50,7 +50,6 @@ class SearchCoordinator: BaseCoordinator {
 extension SearchCoordinator: SearchViewModelCoordinatorDelegate {
     func bookmarkClicked() {
         let viewModel = BookmarkViewModel()
-        viewModel.bookmarkList = UserDefaultsManager.bookmarkList ?? [Movie]()
         viewModel.coordinatorDelegate = self
         guard let vc = self.bookmarkVC else {return}
         vc.viewModel = viewModel
@@ -58,9 +57,11 @@ extension SearchCoordinator: SearchViewModelCoordinatorDelegate {
     }
     
     func starClicked(_ movie: Movie) {
-        var bookmarkList = UserDefaultsManager.bookmarkList ?? [Movie]()
-        bookmarkList.append(movie)
-        UserDefaultsManager.bookmarkList = bookmarkList
+        //        var bookmarkList = UserDefaultsManager.bookmarkList ?? [Movie]()
+        //        bookmarkList.append(movie)
+        //        UserDefaultsManager.bookmarkList = bookmarkList
+        //
+        //
     }
     
     func selectMovie(_ movie: Movie) {

@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import RealmSwift
 
 class BookmarkViewModel {
-    var bookmarkList: [Movie]?
+    var bookmarkList: Results<Movie>?
+    var realm: Realm?
     weak var coordinatorDelegate: SearchViewModelCoordinatorDelegate?
     
-    init() {}
-    
-    init(bookmarkList: [Movie]) {
-        self.bookmarkList = UserDefaultsManager.bookmarkList ?? [Movie]()
+    init() {
+        guard let realm = try? Realm() else {return}
+        self.realm = realm
+        self.bookmarkList = realm.objects(Movie.self)
     }
 }
 
@@ -24,11 +26,15 @@ extension BookmarkViewModel {
     }
 
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return self.bookmarkList?.count ?? 1
+        guard let bookmarkList = self.bookmarkList else {return 0}
+        
+        return bookmarkList.count
     }
 
     func movie(at index: Int) -> Movie {
-        return self.bookmarkList?[index] ?? Movie()
+        guard let bookmarkList = self.bookmarkList else {return Movie()}
+        
+        return bookmarkList[index]
     }
     
     func selectRow(row: Int) {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol SearchViewModelCoordinatorDelegate: AnyObject {
     func selectMovie(_ movie: Movie)
@@ -54,8 +55,12 @@ extension SearchViewModel {
     func starClicked(row: Int) {
         let movie = self.movies[row]
         
-        self.coordinatorDelegate?.starClicked(movie)
+        //self.coordinatorDelegate?.starClicked(movie)
         //print("북마크 등록 - ", movie)
         // todo 유저디폴트 movie 저장
+        let realm = try? Realm()
+        try? realm?.write {
+            realm?.add(movie)
+        }
     }
 }
