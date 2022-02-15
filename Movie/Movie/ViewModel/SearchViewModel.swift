@@ -53,14 +53,25 @@ extension SearchViewModel {
     }
     
     func starClicked(row: Int) {
-        let movie = self.movies[row]
+        let selectedMovie = self.movies[row]
         
         //self.coordinatorDelegate?.starClicked(movie)
         //print("북마크 등록 - ", movie)
         // todo 유저디폴트 movie 저장
-        let realm = try? Realm()
-        try? realm?.write {
-            realm?.add(movie)
+        guard let realm = try? Realm() else {return}
+        let movie = realm.object(ofType: Movie.self, forPrimaryKey: selectedMovie.link)
+            
+        if let movie = movie {
+            // 있으면 삭제
+            try? realm.write {
+                realm.delete(movie)
+            }
+        } else {
+            // 없으면 등록
+            try? realm.write {
+                realm.add(selectedMovie)
+            }
         }
+        //print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 }
