@@ -24,9 +24,9 @@ class SearchViewController: UIViewController {
 
         guard let cell = superview as? MovieCell,
               let indexPath = tableView.indexPath(for: cell) else { return }
-
-        self.viewModel?.starClicked(row: indexPath.row)
-        cell.changeBookmarkBtnImage()
+        
+        self.viewModel?.starClicked(at: indexPath.row)
+        cell.changeBookmarkBtnImage(status: self.viewModel?.movie(at: indexPath.row).isBoolmark)
     }
     
     override func viewDidLoad() {

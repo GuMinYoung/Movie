@@ -15,6 +15,15 @@ class Movie: Object {
     @objc dynamic var director: String?
     @objc dynamic var actor: String?
     @objc dynamic var userRating: String?
+    private var _isBookmark = false
+    var isBoolmark: Bool {
+        get {
+            return _isBookmark
+        }
+        set {
+           _isBookmark = newValue
+        }
+    }
     
     override static func primaryKey() -> String? {
             return "link"

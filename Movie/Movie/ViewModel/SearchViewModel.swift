@@ -52,21 +52,23 @@ extension SearchViewModel {
         self.coordinatorDelegate?.bookmarkClicked()
     }
     
-    func starClicked(row: Int) {
+    func starClicked(at row: Int) {
         let selectedMovie = self.movies[row]
         guard let realm = try? Realm() else {return}
         let movie = realm.object(ofType: Movie.self, forPrimaryKey: selectedMovie.link)
-            
+        
         if let movie = movie {
             // 있으면 삭제
             try? realm.write {
                 realm.delete(movie)
+                self.movies[row].isBoolmark = false
             }
         } else {
             // 없으면 등록
             do {
             try realm.write {
                 realm.create(Movie.self, value: selectedMovie)
+                self.movies[row].isBoolmark = true
                 //realm.add(selectedMovie)
             } }
             catch {

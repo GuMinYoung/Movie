@@ -34,7 +34,8 @@ class MovieCell: UITableViewCell {
         self.thumbnailImageView.setImage(fromUrl: movie.imageUrl ?? "")
     }
     
-    func changeBookmarkBtnImage() {
-        self.bookmarkBtn.setImage(UIImage(systemName: "star.fill"), for: .normal)
+    func changeBookmarkBtnImage(status: Bool?) {
+        let systemName = status == true ? "star.fill" : "star"
+        self.bookmarkBtn.setImage(UIImage(systemName: systemName), for: .normal)
     }
 }
