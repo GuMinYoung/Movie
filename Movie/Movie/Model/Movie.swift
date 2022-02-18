@@ -16,7 +16,7 @@ class Movie: Object {
     @objc dynamic var actor: String?
     @objc dynamic var userRating: String?
     private var _isBookmark = false
-    var isBoolmark: Bool {
+    var isBookmark: Bool {
         get {
             return _isBookmark
         }
@@ -30,10 +30,10 @@ class Movie: Object {
         }
     
     override convenience init() {
-        self.init(title: "", link: "", imageUrl: "", director: "", actor: "", userRating: "")
+        self.init(title: "", link: "", imageUrl: "", director: "", actor: "", userRating: "", isBookmark: false)
     }
     
-    init(title: String?, link: String, imageUrl: String?, director: String?, actor: String?, userRating: String?) {
+    init(title: String?, link: String, imageUrl: String?, director: String?, actor: String?, userRating: String?, isBookmark: Bool) {
         super.init()
         
         self.title = title
@@ -42,5 +42,6 @@ class Movie: Object {
         self.director = director
         self.actor = actor
         self.userRating = userRating
+        self.isBookmark = isBookmark
     }
 }

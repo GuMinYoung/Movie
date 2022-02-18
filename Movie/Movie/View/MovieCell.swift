@@ -32,9 +32,10 @@ class MovieCell: UITableViewCell {
         self.actorLabel.text = "배우: " + (movie.actor ?? "")
         self.userRatingLabel.text = "평점: " + (movie.userRating ?? "")
         self.thumbnailImageView.setImage(fromUrl: movie.imageUrl ?? "")
+        self.setBookmarkBtnImage(status: movie.isBookmark)
     }
     
-    func changeBookmarkBtnImage(status: Bool?) {
+    func setBookmarkBtnImage(status: Bool?) {
         let systemName = status == true ? "star.fill" : "star"
         self.bookmarkBtn.setImage(UIImage(systemName: systemName), for: .normal)
     }
