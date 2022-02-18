@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
               let indexPath = tableView.indexPath(for: cell) else { return }
         
         self.viewModel?.starClicked(at: indexPath.row)
-        cell.changeBookmarkBtnImage(status: self.viewModel?.movie(at: indexPath.row).isBoolmark)
+        cell.setBookmarkBtnImage(status: self.viewModel?.movie(at: indexPath.row).isBookmark)
     }
     
     override func viewDidLoad() {
@@ -44,21 +44,10 @@ class SearchViewController: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField){
-        guard let keywords = textField.text else {return}
-        SearchService.shared.search(keywords: keywords) { response in
-            guard let searchResult = response.items else {return}
-            let movies = searchResult.compactMap {
-                return Movie(title: $0.title?.replacingOccurrences(of: "</b>", with: "")
-                                .replacingOccurrences(of: "<b>", with: ""),
-                             link: $0.link ?? "",
-                             imageUrl: $0.image,
-                             director: $0.director?.dropLast()
-                                .replacingOccurrences(of: "|", with: ", "),
-                             actor: $0.actor?.dropLast()
-                                .replacingOccurrences(of: "|", with: ", "),
-                             userRating: $0.userRating)
-            }
-            self.viewModel?.movies = movies
+        guard let keywords = textField.text,
+              let viewModel = self.viewModel else {return}
+        viewModel.fetchMovie(with: keywords)
+        viewModel.didFinishFetch = {
             self.tableView.reloadData()
         }
     }
