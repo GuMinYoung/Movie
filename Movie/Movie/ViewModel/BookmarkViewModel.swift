@@ -9,14 +9,15 @@ import Foundation
 import RealmSwift
 
 class BookmarkViewModel {
-    var bookmarkList: Results<Movie>?
-    var realm: Realm?
+    var bookmarkList: [Movie]?
     weak var coordinatorDelegate: SearchViewModelCoordinatorDelegate?
     
     init() {
+        //print(#function)
         guard let realm = try? Realm() else {return}
-        self.realm = realm
-        self.bookmarkList = realm.objects(Movie.self)
+        if let savedData = realm.objects(Favorite.self).first {
+            self.bookmarkList = savedData.bookmarkList.map { Movie(realmObject: $0)}
+        }
     }
 }
 
@@ -48,7 +49,5 @@ extension BookmarkViewModel {
         let movie = bookmarkList[row]
         
         self.coordinatorDelegate?.starClicked(movie)
-        //print("북마크 등록 - ", movie)
-        // todo 유저디폴트 movie 저장
     }
 }
