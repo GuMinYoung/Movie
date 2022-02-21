@@ -40,22 +40,39 @@ class SearchViewModel {
     func fetchMovie(with keywords: String) {
         SearchService.shared.search(keywords: keywords) { response in
             guard let searchResult = response.items else {return}
+            let realm = try! Realm()
             let movies: [Movie] = searchResult.compactMap {
-                guard let realm = try? Realm() else {return Movie()}
-                let movie = realm.object(ofType: Movie.self, forPrimaryKey: $0.link)
-
-                let isBookmark = movie != nil ? true : false
-                
-                return Movie(title: $0.title?.replacingOccurrences(of: "</b>", with: "")
-                                .replacingOccurrences(of: "<b>", with: ""),
-                             link: $0.link ?? "",
-                             imageUrl: $0.image,
-                             director: $0.director?.dropLast()
-                                .replacingOccurrences(of: "|", with: ", "),
-                             actor: $0.actor?.dropLast()
-                                .replacingOccurrences(of: "|", with: ", "),
-                             userRating: $0.userRating,
-                             isBookmark: isBookmark)
+               // let realmMovie = realm.object(ofType: RealmMovie.self, forPrimaryKey: $0.link)
+                var savedMovies = [Movie]()
+                if let savedData = realm.objects(Favorite.self).first {
+                    savedMovies = Array(savedData.bookmarkList).map { Movie(realmObject: $0) }
+                }
+                let movie = $0
+                if let object = savedMovies.first(where: { $0.link == movie.link
+                }) {
+                    return Movie(title: object.title.replacingOccurrences(of: "</b>", with: "")
+                                    .replacingOccurrences(of: "<b>", with: ""),
+                                 link: object.link,
+                                 imageUrl: object.imageUrl,
+                                 director: object.director.dropLast()
+                                    .replacingOccurrences(of: "|", with: ", "),
+                                 actor: object.actor.dropLast()
+                                    .replacingOccurrences(of: "|", with: ", "),
+                                 userRating: object.userRating,
+                                 isBookmark: true)
+                } else {
+                    return Movie(realmObject: RealmMovie(title: movie.title?.replacingOccurrences(of: "</b>", with: "")
+                                    .replacingOccurrences(of: "<b>", with: ""),
+                                                           link: movie.link ?? "",
+                                 imageUrl: movie.image,
+                                                           director: movie.director?.dropLast()
+                                    .replacingOccurrences(of: "|", with: ", "),
+                                 actor: movie.actor?.dropLast()
+                                    .replacingOccurrences(of: "|", with: ", "),
+                                 userRating: movie.userRating,
+                                 isBookmark: false))
+                }
+            
             }
             self.movies = movies
         }
@@ -88,22 +105,32 @@ extension SearchViewModel {
     func starClicked(at row: Int) {
         let selectedMovie = self.movies[row]
         guard let realm = try? Realm() else {return}
-        let movie = realm.object(ofType: Movie.self, forPrimaryKey: selectedMovie.link)
         
-        if let movie = movie {
-            // 있으면 삭제
-            try? realm.write {
-                realm.delete(movie)
-                self.movies[row].isBookmark = false
+        if let savedData = realm.objects(Favorite.self).first {
+            try! realm.write{
+                if let idx = savedData.bookmarkList.firstIndex(where: {
+                    $0.link == selectedMovie.link
+                })
+                {
+                    savedData.bookmarkList.remove(at: idx)
+                    self.movies[row].isBookmark = false
+                } else {
+                    
+                    savedData.bookmarkList.append(selectedMovie.realmObject())
+                    self.movies[row].isBookmark = true
+                    
+                }
             }
         } else {
-            // 없으면 등록
             do {
-            try realm.write {
-                realm.create(Movie.self, value: selectedMovie)
-                self.movies[row].isBookmark = true
-                //realm.add(selectedMovie)
-            } }
+                let realmMovieList = List<RealmMovie>()
+                realmMovieList.append(selectedMovie.realmObject())
+                let newData = Favorite(bookmarkList: realmMovieList)
+                try realm.write {
+                    realm.create(Favorite.self, value: newData)
+                    self.movies[row].isBookmark = true
+                }
+            }
             catch {
                 print(error.localizedDescription)
             }
