@@ -204,6 +204,9 @@
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="star" catalog="system" title=""/>
+                                                    <connections>
+                                                        <action selector="starButtonClicked:" destination="ux2-J0-klP" eventType="touchUpInside" id="2Tt-7f-TQ4"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

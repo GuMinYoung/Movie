@@ -23,10 +23,15 @@ class SearchViewController: UIViewController {
         }
 
         guard let cell = superview as? MovieCell,
-              let indexPath = tableView.indexPath(for: cell) else { return }
+              let indexPath = tableView.indexPath(for: cell),
+        let viewModel = self.viewModel else { return }
         
-        self.viewModel?.starClicked(at: indexPath.row)
-        cell.setBookmarkBtnImage(status: self.viewModel?.movie(at: indexPath.row).isBookmark)
+        viewModel.starClicked(at: indexPath.row)
+        cell.setBookmarkBtnImage(status: viewModel.movie(at: indexPath.row).isBookmark)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
     }
     
     override func viewDidLoad() {

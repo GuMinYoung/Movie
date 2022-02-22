@@ -9,16 +9,17 @@ import Foundation
 import RealmSwift
 
 class BookmarkViewModel {
-    var bookmarkList: [Movie]?
+    var bookmarkList: [Movie]
     weak var coordinatorDelegate: SearchViewModelCoordinatorDelegate?
     
     init() {
         //print(#function)
-        guard let realm = try? Realm() else {return}
-        if let savedData = realm.objects(Favorite.self).first {
+        if let savedData = RealmManager.shared.db.objects(Favorite.self).first {
             self.bookmarkList = savedData.bookmarkList.map {
                 let realmObject = RealmMovie(title: $0.title, link: $0.link, imageUrl: $0.imageUrl, director: $0.director, actor: $0.actor, userRating: $0.userRating, isBookmark: true)
                 return Movie(realmObject: realmObject)}
+        } else {
+            self.bookmarkList = [Movie]()
         }
     }
 }
@@ -29,27 +30,20 @@ extension BookmarkViewModel {
     }
 
     func numberOfRowsInSection(_ section: Int) -> Int {
-        guard let bookmarkList = self.bookmarkList else {return 0}
-        
-        return bookmarkList.count
+        return self.bookmarkList.count
     }
 
     func movie(at index: Int) -> Movie {
-        guard let bookmarkList = self.bookmarkList else {return Movie()}
-        
-        return bookmarkList[index]
+        return self.bookmarkList[index]
     }
     
     func selectRow(row: Int) {
-        guard let movie = self.bookmarkList?[row] else {return}
+        let movie = self.bookmarkList[row]
         
         self.coordinatorDelegate?.selectMovie(movie)
     }
     
-    func starClicked(row: Int) {
-        guard let bookmarkList = self.bookmarkList else {return}
-        let movie = bookmarkList[row]
-        
-        self.coordinatorDelegate?.starClicked(movie)
+    func starClicked(at row: Int) {
+        self.coordinatorDelegate?.starClicked(&self.bookmarkList[row])
     }
 }

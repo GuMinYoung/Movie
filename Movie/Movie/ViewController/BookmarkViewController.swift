@@ -27,6 +27,21 @@ class BookmarkViewController: UIViewController {
         //let closeButton = UIBarButtonItem(title: "닫기", style: UIBarButtonItem.Style.done, target: self, action: )
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func starButtonClicked(_ sender: UIButton) {
+        var superview = sender.superview
+        while let view = superview, !(view is UITableViewCell) {
+            superview = view.superview
+        }
+
+        guard let cell = superview as? MovieCell,
+              let indexPath = tableView.indexPath(for: cell) else { return }
+        
+        self.viewModel.starClicked(at: indexPath.row)
+        cell.setBookmarkBtnImage(status: self.viewModel.movie(at: indexPath.row).isBookmark)
+        self.tableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
 }
 
 extension BookmarkViewController: UITableViewDataSource {

@@ -19,6 +19,7 @@
 		8E180ABD27BA8CE300413FA8 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E180ABC27BA8CE300413FA8 /* BookmarkViewController.swift */; };
 		8E180ABF27BA8D4E00413FA8 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E180ABE27BA8D4E00413FA8 /* BookmarkViewModel.swift */; };
 		8E180AC327BAA09200413FA8 /* BookmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E180AC227BAA09200413FA8 /* BookmarkCoordinator.swift */; };
+		FBA2A5FB27C44E5C002C84A7 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2A5FA27C44E5C002C84A7 /* Realm.swift */; };
 		FBFB19BC27B9C8FD0078084A /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB19BB27B9C8FD0078084A /* SearchService.swift */; };
 		FBFB19BE27B9CAC80078084A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB19BD27B9CAC80078084A /* Response.swift */; };
 		FBFB19C127B9CCDE0078084A /* RealmMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB19C027B9CCDE0078084A /* RealmMovie.swift */; };
@@ -48,6 +49,7 @@
 		8E180ABC27BA8CE300413FA8 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		8E180ABE27BA8D4E00413FA8 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 		8E180AC227BAA09200413FA8 /* BookmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCoordinator.swift; sourceTree = "<group>"; };
+		FBA2A5FA27C44E5C002C84A7 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		FBFB19BB27B9C8FD0078084A /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		FBFB19BD27B9CAC80078084A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		FBFB19C027B9CCDE0078084A /* RealmMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMovie.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				FBFB19C027B9CCDE0078084A /* RealmMovie.swift */,
+				FBA2A5FA27C44E5C002C84A7 /* Realm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				FBFB19BC27B9C8FD0078084A /* SearchService.swift in Sources */,
 				8E180ABF27BA8D4E00413FA8 /* BookmarkViewModel.swift in Sources */,
 				8E180AB727B727A300413FA8 /* MovieCell.swift in Sources */,
+				FBA2A5FB27C44E5C002C84A7 /* Realm.swift in Sources */,
 				8E180A9B27B6A8F800413FA8 /* SceneDelegate.swift in Sources */,
 				8E180ABD27BA8CE300413FA8 /* BookmarkViewController.swift in Sources */,
 				FBFB19D427BA227E0078084A /* DetailViewModel.swift in Sources */,

@@ -10,7 +10,7 @@ import RealmSwift
 
 protocol SearchViewModelCoordinatorDelegate: AnyObject {
     func selectMovie(_ movie: Movie)
-    func starClicked(_ movie: Movie)
+    func starClicked(_ movie: inout Movie)
     func bookmarkClicked()
 }
 
@@ -40,11 +40,10 @@ class SearchViewModel {
     func fetchMovie(with keywords: String) {
         SearchService.shared.search(keywords: keywords) { response in
             guard let searchResult = response.items else {return}
-            let realm = try! Realm()
             let movies: [Movie] = searchResult.compactMap {
                // let realmMovie = realm.object(ofType: RealmMovie.self, forPrimaryKey: $0.link)
                 var savedMovies = [Movie]()
-                if let savedData = realm.objects(Favorite.self).first {
+                if let savedData = RealmManager.shared.db.objects(Favorite.self).first {
                     savedMovies = Array(savedData.bookmarkList).map { Movie(realmObject: $0) }
                 }
                 let movie = $0
@@ -103,38 +102,7 @@ extension SearchViewModel {
     }
     
     func starClicked(at row: Int) {
-        let selectedMovie = self.movies[row]
-        guard let realm = try? Realm() else {return}
-        
-        if let savedData = realm.objects(Favorite.self).first {
-            try! realm.write{
-                if let idx = savedData.bookmarkList.firstIndex(where: {
-                    $0.link == selectedMovie.link
-                })
-                {
-                    savedData.bookmarkList.remove(at: idx)
-                    self.movies[row].isBookmark = false
-                } else {
-                    
-                    savedData.bookmarkList.append(selectedMovie.realmObject())
-                    self.movies[row].isBookmark = true
-                    
-                }
-            }
-        } else {
-            do {
-                let realmMovieList = List<RealmMovie>()
-                realmMovieList.append(selectedMovie.realmObject())
-                let newData = Favorite(bookmarkList: realmMovieList)
-                try realm.write {
-                    realm.create(Favorite.self, value: newData)
-                    self.movies[row].isBookmark = true
-                }
-            }
-            catch {
-                print(error.localizedDescription)
-            }
-        }
-        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        self.coordinatorDelegate?.starClicked(&self.movies[row])
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 }
