@@ -265,7 +265,7 @@
                                 <rect key="frame" x="5" y="49" width="404" height="184.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gcn-XT-DfR">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="184.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="370" height="184.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nBH-Ow-MTr">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="184.5"/>
@@ -274,22 +274,22 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bEh-m6-Dp0">
-                                                <rect key="frame" x="125" y="0.0" width="230" height="184.5"/>
+                                                <rect key="frame" x="125" y="0.0" width="245" height="184.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감독: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRX-oT-zaP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="230" height="56"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="245" height="56"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="출연: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFy-ZB-EsG">
-                                                        <rect key="frame" x="0.0" y="64" width="230" height="56.5"/>
+                                                        <rect key="frame" x="0.0" y="64" width="245" height="56.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평점: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWW-T2-FhV">
-                                                        <rect key="frame" x="0.0" y="128.5" width="230" height="56"/>
+                                                        <rect key="frame" x="0.0" y="128.5" width="245" height="56"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -299,7 +299,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="is3-Gf-mHb">
-                                        <rect key="frame" x="360" y="5" width="24" height="24"/>
+                                        <rect key="frame" x="375" y="5" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="is3-Gf-mHb" secondAttribute="height" multiplier="1:1" id="c9B-fX-Lop"/>
                                         </constraints>
@@ -311,12 +311,12 @@
                                 <constraints>
                                     <constraint firstItem="gcn-XT-DfR" firstAttribute="top" secondItem="law-c2-i7m" secondAttribute="top" id="2A8-FZ-FPu"/>
                                     <constraint firstItem="gcn-XT-DfR" firstAttribute="leading" secondItem="law-c2-i7m" secondAttribute="leading" id="40C-ME-3tg"/>
+                                    <constraint firstAttribute="trailing" secondItem="is3-Gf-mHb" secondAttribute="trailing" constant="5" id="5NT-8a-1vI"/>
                                     <constraint firstItem="is3-Gf-mHb" firstAttribute="width" secondItem="nBH-Ow-MTr" secondAttribute="width" multiplier="0.2" id="XXn-1G-ZQz"/>
                                     <constraint firstItem="nBH-Ow-MTr" firstAttribute="width" secondItem="law-c2-i7m" secondAttribute="width" multiplier="0.29703" id="cYI-XA-sxO"/>
                                     <constraint firstItem="is3-Gf-mHb" firstAttribute="leading" secondItem="gcn-XT-DfR" secondAttribute="trailing" constant="5" id="j0r-np-Hu7"/>
                                     <constraint firstAttribute="bottom" secondItem="gcn-XT-DfR" secondAttribute="bottom" id="npF-rf-u8W"/>
                                     <constraint firstItem="is3-Gf-mHb" firstAttribute="top" secondItem="law-c2-i7m" secondAttribute="top" constant="5" id="rht-9h-mqU"/>
-                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="is3-Gf-mHb" secondAttribute="trailing" constant="20" symbolic="YES" id="yqF-9f-gWc"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="actorLabel" destination="jFy-ZB-EsG" id="XIn-E1-vJe"/>
