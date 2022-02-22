@@ -89,7 +89,7 @@ class RealmMovie: Object {
     @Persisted var director: String?
     @Persisted var actor: String?
     @Persisted var userRating: String?
-    private var _isBookmark = false
+    private var _isBookmark = true
     var isBookmark: Bool {
         get {
             return _isBookmark

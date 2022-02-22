@@ -16,7 +16,9 @@ class BookmarkViewModel {
         //print(#function)
         guard let realm = try? Realm() else {return}
         if let savedData = realm.objects(Favorite.self).first {
-            self.bookmarkList = savedData.bookmarkList.map { Movie(realmObject: $0)}
+            self.bookmarkList = savedData.bookmarkList.map {
+                let realmObject = RealmMovie(title: $0.title, link: $0.link, imageUrl: $0.imageUrl, director: $0.director, actor: $0.actor, userRating: $0.userRating, isBookmark: true)
+                return Movie(realmObject: realmObject)}
         }
     }
 }
