@@ -22,7 +22,7 @@ class MovieInfo: UIView {
         self.setBookmarkBtnImage(status: movie.isBookmark)
     }
     
-    func setBookmarkBtnImage(status: Bool?) {
+    func setBookmarkBtnImage(status: Bool) {
         let systemName = status == true ? "star.fill" : "star"
         self.bookmarkBtn.setImage(UIImage(systemName: systemName), for: .normal)
     }

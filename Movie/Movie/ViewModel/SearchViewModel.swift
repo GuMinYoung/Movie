@@ -10,11 +10,12 @@ import RealmSwift
 
 protocol SearchViewModelCoordinatorDelegate: AnyObject {
     func selectMovie(_ movie: Movie)
-    func starClicked(_ movie: inout Movie)
+    func starClicked(_ selectedMovie: inout Movie)
     func bookmarkClicked()
 }
 
 extension SearchViewModelCoordinatorDelegate {
+    func selectMovie(_ movie: Movie) {}
     func bookmarkClicked() {}
 }
 

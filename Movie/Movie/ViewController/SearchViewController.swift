@@ -28,10 +28,6 @@ class SearchViewController: UIViewController {
         
         viewModel.starClicked(at: indexPath.row)
         cell.setBookmarkBtnImage(status: viewModel.movie(at: indexPath.row).isBookmark)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        
     }
     
     override func viewDidLoad() {

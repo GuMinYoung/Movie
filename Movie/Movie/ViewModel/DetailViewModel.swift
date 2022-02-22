@@ -8,18 +8,18 @@
 import Foundation
 
 protocol DetailViewModelCoordinatorlDelegate: AnyObject {
-  func bookmark()
+    func starClicked(_ movie: inout Movie)
 }
 
 class DetailViewModel {
-    let movie: Movie
-    weak var coordinatorDelegate: DetailViewModelCoordinatorlDelegate?
+    var movie: Movie
+    weak var coordinatorDelegate: SearchViewModelCoordinatorDelegate?
     
     init(with movie: Movie) {
         self.movie = movie
     }
     
-    func bookmarkClicked() {
-      self.coordinatorDelegate?.bookmark()
+    func starClicked() {
+        self.coordinatorDelegate?.starClicked(&self.movie)
     }
 }
