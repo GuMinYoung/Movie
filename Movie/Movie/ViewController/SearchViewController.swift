@@ -44,6 +44,16 @@ class SearchViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        guard let keywords = searchField.text,
+              let viewModel = self.viewModel else {return}
+        guard !keywords.isEmpty else {return}
+        viewModel.fetchMovie(with: keywords)
+        viewModel.didFinishFetch = {
+            self.tableView.reloadData()
+        }
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField){
         guard let keywords = textField.text,
               let viewModel = self.viewModel else {return}

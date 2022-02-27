@@ -70,7 +70,6 @@ extension SearchCoordinator: SearchViewModelCoordinatorDelegate {
                     
                     savedData.bookmarkList.append(selectedMovie.realmObject())
                     selectedMovie.isBookmark = true
-                    
                 }
             }
         } else {
