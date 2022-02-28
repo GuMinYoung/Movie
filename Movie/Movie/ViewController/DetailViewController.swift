@@ -28,10 +28,11 @@ class DetailViewController: UIViewController {
     }
     
     @objc func starButtonClicked(_ sender: UIButton) {
-        self.viewModel?.starClicked()
+        
         guard let viewModel = self.viewModel else {
             return
         }
+        viewModel.starClicked()
         self.infoView.setBookmarkBtnImage(status: viewModel.movie.isBookmark)
     }
 }
