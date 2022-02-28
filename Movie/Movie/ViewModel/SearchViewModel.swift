@@ -54,7 +54,8 @@ class SearchViewModel {
                                     .replacingOccurrences(of: "<b>", with: ""),
                                  link: object.link,
                                  imageUrl: object.imageUrl,
-                                 director: object.director.dropLast()
+                                 director: object.director.replacingOccurrences(of: "</b>", with: "")
+                                    .replacingOccurrences(of: "<b>", with: "").dropLast()
                                     .replacingOccurrences(of: "|", with: ", "),
                                  actor: object.actor.dropLast()
                                     .replacingOccurrences(of: "|", with: ", "),
@@ -63,10 +64,12 @@ class SearchViewModel {
                 } else {
                     return Movie(realmObject: RealmMovie(title: movie.title?.replacingOccurrences(of: "</b>", with: "")
                                     .replacingOccurrences(of: "<b>", with: ""),
-                                                           link: movie.link ?? "",
+                                 link: movie.link ?? "",
                                  imageUrl: movie.image,
-                                                           director: movie.director?.dropLast()
-                                    .replacingOccurrences(of: "|", with: ", "),
+                                 director: movie.director?.dropLast()
+                                                            .replacingOccurrences(of: "</b>", with: "")
+                                                            .replacingOccurrences(of: "<b>", with: "")
+                                                            .replacingOccurrences(of: "|", with: ", "),
                                  actor: movie.actor?.dropLast()
                                     .replacingOccurrences(of: "|", with: ", "),
                                  userRating: movie.userRating,
