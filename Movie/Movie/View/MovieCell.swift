@@ -14,16 +14,10 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var userRatingLabel: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var bookmarkBtn: UIButton!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.thumbnailImageView.image = nil
     }
     
     func update(_ movie: Movie) {
