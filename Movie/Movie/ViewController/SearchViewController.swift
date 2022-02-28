@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import Alamofire
+import RealmSwift
 
 class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -21,14 +22,17 @@ class SearchViewController: UIViewController {
             superview = view.superview
         }
 
-        guard let cell = superview as? UITableViewCell,
-              let indexPath = tableView.indexPath(for: cell) else { return }
-
-        self.viewModel?.starClicked(row: indexPath.row)
+        guard let cell = superview as? MovieCell,
+              let indexPath = tableView.indexPath(for: cell),
+        let viewModel = self.viewModel else { return }
+        
+        viewModel.starClicked(at: indexPath.row)
+        cell.setBookmarkBtnImage(status: viewModel.movie(at: indexPath.row).isBookmark)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
@@ -40,22 +44,21 @@ class SearchViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        guard let keywords = searchField.text,
+              let viewModel = self.viewModel else {return}
+        guard !keywords.isEmpty else {return}
+        viewModel.fetchMovie(with: keywords)
+        viewModel.didFinishFetch = {
+            self.tableView.reloadData()
+        }
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField){
-        guard let keywords = textField.text else {return}
-        SearchService.shared.search(keywords: keywords) { response in
-            guard let searchResult = response.items else {return}
-            let movies = searchResult.map {
-                return Movie(title: $0.title?.replacingOccurrences(of: "</b>", with: "")
-                                             .replacingOccurrences(of: "<b>", with: ""),
-                             link: $0.link,
-                             imageUrl: $0.image,
-                             director: $0.director?.dropLast()
-                                                   .replacingOccurrences(of: "|", with: ", "),
-                             actor: $0.actor?.dropLast()
-                                             .replacingOccurrences(of: "|", with: ", "),
-                             userRating: $0.userRating)
-            }
-            self.viewModel?.movies = movies
+        guard let keywords = textField.text,
+              let viewModel = self.viewModel else {return}
+        viewModel.fetchMovie(with: keywords)
+        viewModel.didFinishFetch = {
             self.tableView.reloadData()
         }
     }

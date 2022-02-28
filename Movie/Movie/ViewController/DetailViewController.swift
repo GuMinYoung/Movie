@@ -24,6 +24,15 @@ class DetailViewController: UIViewController {
         let req = URLRequest(url: url)
         self.webView.load(req)
         self.infoView.update(with: movie)
+        self.infoView.bookmarkBtn.addTarget(self, action: #selector(starButtonClicked(_:)), for: .touchUpInside)
+    }
+    
+    @objc func starButtonClicked(_ sender: UIButton) {
+        self.viewModel?.starClicked()
+        guard let viewModel = self.viewModel else {
+            return
+        }
+        self.infoView.setBookmarkBtnImage(status: viewModel.movie.isBookmark)
     }
 }
 
